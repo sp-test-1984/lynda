@@ -17,7 +17,7 @@ public class App
     private static final String USER = "dbuser";
     private static final String PASSWORD = "dbpassword";
 
-    public static void main( String[] args ) {
+    public static void main( String[] args ) throws SQLException {
         Connection conn = null;
 
         try {
@@ -25,6 +25,10 @@ public class App
             System.out.println("Connected!");
         } catch (SQLException e) {
             e.printStackTrace();
+        } finally {
+            if(conn != null){
+                conn.close();
+            }
         }
     }
 }
