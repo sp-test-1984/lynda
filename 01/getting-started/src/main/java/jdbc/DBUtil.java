@@ -12,7 +12,7 @@ public class DBUtil {
     private static final String H_CONN_STRING =
             "jdbc:hsqldb:data/explorecalifornia";
 
-    private static final String USER = "dbuser";
+    private static final String USER = "dbuser1";
     private static final String PASSWORD = "dbpassword";
 
 
@@ -25,5 +25,11 @@ public class DBUtil {
                 default:
                     return null;
         }
+    }
+
+    public static void processException(SQLException e){
+        System.err.println("Error message: " + e.getMessage());
+        System.err.println("Error code: " + e.getErrorCode());
+        System.err.println("SQL State: " + e.getSQLState());
     }
 }

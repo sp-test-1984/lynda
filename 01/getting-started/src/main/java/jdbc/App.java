@@ -9,12 +9,6 @@ import java.sql.*;
 public class App 
 {
 
-    private static final String CONN_STRING =
-            "jdbc:mysql://localhost/explorecalifornia";
-
-    private static final String USER = "dbuser";
-    private static final String PASSWORD = "dbpassword";
-
     public static void main( String[] args ) throws SQLException {
         Connection conn = null;
         Statement stmt = null;
@@ -23,11 +17,11 @@ public class App
         try {
             conn = DBUtil.getConnection(DBType.MYSQL);
             stmt = conn.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_READ_ONLY);
-            rs = stmt.executeQuery("SELECT * FROM STATES");
+            rs = stmt.executeQuery("SELECT stateId, stateName FROM STATES");
             rs.last();
             System.out.println("Number of rows: " + rs.getRow());
         } catch (SQLException e) {
-            e.printStackTrace();
+            DBUtil.processException(e);
         } finally {
             if(rs != null){
                 rs.close();
