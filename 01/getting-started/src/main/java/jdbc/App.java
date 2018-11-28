@@ -1,8 +1,6 @@
 package jdbc;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
+import java.sql.*;
 
 /**
  * Hello world!
@@ -19,10 +17,15 @@ public class App
 
     public static void main( String[] args ) throws SQLException {
         Connection conn = null;
+        Statement stmt = null;
+        ResultSet rs = null;
 
         try {
             conn = DriverManager.getConnection(CONN_STRING, USER, PASSWORD);
-            System.out.println("Connected!");
+            stmt = conn.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_READ_ONLY);
+            rs = stmt.executeQuery("SELECT * FROM STATES");
+            rs.last();
+            System.out.println("Number of rows: " + rs.getRow());
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
