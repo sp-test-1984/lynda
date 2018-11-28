@@ -29,6 +29,12 @@ public class App
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
+            if(rs != null){
+                rs.close();
+            }
+            if(stmt != null){
+                rs.close();
+            }
             if(conn != null){
                 conn.close();
             }
